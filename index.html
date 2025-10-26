@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utkarsh Gupte | Portfix</title>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #141414;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* --- Custom Scrollbar (Firefox-only) --- */
+        .scrollbar-hide {
+            scrollbar-width: none; /* Firefox */
+        }
+        /* --- Custom Scrollbar (Chrome/Safari/Edge) --- */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* --- Reusable Container --- */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /*Header*/
+        #main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            transition: background-color 0.3s ease;
+        }
+
+        #main-header.scrolled {
+            background-color: rgba(20, 20, 20, 0.9);
+        }
+
+        #main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px; /* 64px */
+        }
+
+        #main-header .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #E50914; 
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+
+        #main-header nav {
+            display: none; /* Hidden on mobile */
+        }
+        @media (min-width: 768px) {
+            #main-header nav {
+                display: flex;
+                align-items: center;
+                gap: 24px; 
+            }
+        }
+
+        #main-header nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        #main-header nav a:hover {
+            color: #b3b3b3;
+        }
+
+        #main-header .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* 16px */
+        }
+
+        #main-header .avatar {
+            width: 2rem; /* 32px */
+            height: 2rem; /* 32px */
+            background-color: #e8590c;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        #main-header .avatar img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Hero Section (NOW A SLIDER) --- */
+        .hero-slider {
+            position: relative;
+            height: 90vh; /* 90% of viewport height */
+            width: 100%;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .hero-slider-track {
+            display: flex;
+            height: 100%;
+            width: 300%; /* 100% * 3 slides */
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-slide {
+            width: 33.3333%; /* Each slide takes 1/3 of the track */
+            flex-shrink: 0;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(to top, rgba(20,20,20,1) 10%, rgba(20,20,20,0.6) 50%, transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding-top: 4rem;
+        }
+
+        .hero-content h2 {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
+        }
+        @media (min-width: 768px) {
+            .hero-content h2 {
+                font-size: 3.75rem; /* 60px */
+            }
+        }
+
+        .hero-content h3 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: #e5e5e5;
+            margin-top: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-content p {
+            font-size: 1.125rem; /* 18px */
+            color: #d4d4d4;
+            margin-top: 1rem;
+            max-width: 42rem; /* 672px */
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* --- Slider Dots --- */
+        .slider-dots {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.75rem;
+            z-index: 25;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .slider-dot.active {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* --- Hero Scroll Buttons --- */
+        .hero-scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 25;
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 4rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            opacity: 0; /* Hide by default, show on hover */
+        }
+        .hero-scroll-btn.left {
+            left: 1.5rem;
+        }
+        .hero-scroll-btn.right {
+            right: 1.5rem;
+        }
+        .hero-slider:hover .hero-scroll-btn {
+            opacity: 1; /* Show on slider hover */
+        }
+        .hero-scroll-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1.5rem; /* 8px 24px */
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn svg {
+            width: 1.5rem; /* 24px */
+            height: 1.5rem; /* 24px */
+            margin-right: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .btn-primary:hover {
+            background-color: #e6e6e6;
+            transform: scale(1.03);
+        }
+
+        .btn-secondary {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: #ffffff;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(109, 109, 110, 0.5);
+            transform: scale(1.03);
+        }
+
+        /* --- NEW: About Section --- */
+        .about-section {
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 1px solid #222;
+            /* FIX: Increased margin-bottom */
+            margin-bottom: 5rem; 
+        }
+        .about-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .about-section h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #b3b3b3;
+        }
+
+        /* --- Content Rows --- */
+        .content-section {
+            position: relative;
+            z-index: 20;
+            margin-top: -5rem; 
+            padding-bottom: 4rem;
+            /* FIX: Added padding-top to create space */
+            padding-top: 3rem;
+        }
+
+        .content-row {
+            margin-bottom: 3rem; /* 48px */
+        }
+
+        .content-row h2 {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem; /* Aligns with container padding */
+        }
+        @media (min-width: 1400px) {
+            .content-row h2 {
+                padding-left: 0; /* No padding needed if container is centered */
+            }
+        }
+
+        .row-container {
+            position: relative;
+        }
+
+        .row-scroll {
+            display: flex;
+            gap: 0.5rem; /* 8px */
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 1rem 0;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        @media (min-width: 1400px) {
+            .row-scroll {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        
+        /* --- Project Card --- */
+        .project-card {
+            flex-shrink: 0;
+            width: 20rem; /* 320px */
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease-out;
+            position: relative;
+        }
+        
+        .project-card:hover {
+            transform: scale(1.05);
+            z-index: 30;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* --- Row Scroll Buttons --- */
+        .scroll-button {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3rem; /* 48px */
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            cursor: pointer;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s ease;
+        }
+
+        /* Show buttons when hovering the whole row-container */
+        .row-container:hover .scroll-button {
+            opacity: 1;
+        }
+        
+        .scroll-button.left {
+            left: 0;
+        }
+        .scroll-button.right {
+            right: 0;
+        }
+
+        .scroll-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* --- ALL MODAL CSS REMOVED --- */
+
+
+        /* --- Footer --- */
+        #main-footer {
+            padding: 2rem 0;
+            border-top: 1px solid #333;
+            color: #808080;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem; /* 24px */
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: #808080;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .social-links a:hover {
+            color: #ffffff;
+        }
+
+        .social-links svg {
+            width: 1.5rem; /* 24px */
+            height: 1.5rem; /* 24px */
+            fill: currentColor;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem; /* 14px */
+        }
+        
+        .footer-links a {
+            color: #808080;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-copy {
+            font-size: 0.75rem; /* 12px */
+        }
+    </style>
+    <!-- END OF CSS -->
+
+</head>
+<body>
+
+    <!-- Header -->
+    <!-- FIX: Added 'scrolled' class to make header dark by default -->
+    <header id="main-header" class="scrolled">
+        <div class="container">
+            <a href="#" class="logo">Portfix</a>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header-right">
+                <!-- Notification Bell Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" style="width: 1.5rem; height: 1.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                <!-- User Avatar Placeholder -->
+                <div class="avatar">
+                   <img src="https://placehold.co/32x32/lightblue/black?text=U" alt="User Avatar"/>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 
+          NEW HERO SLIDER SECTION
+        -->
+        <section class="hero-slider">
+            <div class="hero-slider-track">
+                <!-- Slide 1: Student Registration System -->
+                <div class="hero-slide">
+                    <div class="hero-background" style="background-image: url('https://placehold.co/1600x900/f03e3e/white?text=Student+System');"></div>
+                    <div class="hero-gradient"></div>
+                    <div class="container hero-content">
+                        <h2>Student Registration System</h2>
+                        <h3>Python | Tkinter | MySQL</h3>
+                        <p>A foundational desktop application for managing student records with a GUI, full CRUD functionality, and a MySQL database.</p>
+                        <div class="hero-buttons">
+                            <!-- FIX: Changed button to <a> link, removed onclick -->
+                            <a href="https://github.com/utkarsh-291/Student-Registration-System" target="_blank" class="btn btn-primary">
+                                <!-- FIX: Added GitHub Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Portfix (This Portfolio) -->
+                <div class="hero-slide">
+                    <div class="hero-background" style="background-image: url('https://placehold.co/1600x900/228be6/white?text=Portfix');"></div>
+                    <div class="hero-gradient"></div>
+                    <div class="container hero-content">
+                        <h2>Portfix (This Portfolio)</h2>
+                        <h3>HTML | CSS | JavaScript</h3>
+                        <p>A portfolio built from scratch to mimic the Netflix UI, demonstrating front-end skills in HTML, CSS, and vanilla JavaScript.</p>
+                        <div class="hero-buttons">
+                             <!-- FIX: Changed button to <a> link, removed onclick -->
+                             <a href="https://github.com/utkarsh-291" target="_blank" class="btn btn-primary">
+                                <!-- FIX: Added GitHub Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3: Mental Health System -->
+                <div class="hero-slide">
+                    <div class="hero-background" style="background-image: url('https://placehold.co/1600x900/40c057/white?text=Mental+Health+System');"></div>
+                    <div class="hero-gradient"></div>
+                    <div class="container hero-content">
+                        <h2>Mental Health System (On Going)</h2>
+                        <h3>Python | Django | ML</h3>
+                        <p>An active web platform for mental health support, featuring user auth, resources, and a planned machine learning component.</p>
+                        <div class="hero-buttons">
+                             <!-- FIX: Changed button to <a> link, removed onclick -->
+                             <a href="https://github.com/utkarsh-291/AAROHAN" target="_blank" class="btn btn-primary">
+                                <!-- FIX: Added GitHub Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Slider Navigation Dots -->
+            <div class="slider-dots">
+                <span class="slider-dot active" onclick="moveToSlide(0)"></span>
+                <span class="slider-dot" onclick="moveToSlide(1)"></span>
+                <span class="slider-dot" onclick="moveToSlide(2)"></span>
+            </div>
+            
+            <!-- Hero Scroll Buttons -->
+            <button class="hero-scroll-btn left" onclick="prevSlide()">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width: 3rem; height: 3rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button class="hero-scroll-btn right" onclick="nextSlide()">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width: 3rem; height: 3rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </section>
+        <!-- END OF NEW HERO SLIDER -->
+
+
+        <!-- Content Rows Section -->
+        <section class="content-section">
+            
+            <!-- NEW: About Section -->
+            <div class="about-section container">
+                <h2>Utkarsh Gupte</h2>
+                <h3>Python Developer | Web Enthusiast | Problem Solver</h3>
+            </div>
+
+            <!-- Skills Row -->
+            <div id="skills" class="content-row">
+                <h2>Skills & Technologies</h2>
+                <div class="row-container">
+                    <button onclick="scrollRow(this, 'left')" class="scroll-button left">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 2rem; height: 2rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <div class="row-scroll scrollbar-hide">
+                        <!-- 
+                          FIX: Removed onclick functionality from skill cards 
+                        -->
+                        <div class="project-card">
+                           <img src="https://placehold.co/600x338/15aabf/white?text=Python" alt="Python" />
+                        </div>
+                        <div class="project-card">
+                           <img src="https://placehold.co/600x338/f59f00/white?text=SQL" alt="SQL" />
+                        </div>
+                        <div class="project-card">
+                           <img src="https://placehold.co/600x338/12b886/white?text=Pandas" alt="Pandas" />
+                        </div>
+                        <div class="project-card">
+                           <img src="https://placehold.co/600x338/40c057/white?text=Numpy" alt="Numpy" />
+                        </div>
+                        <div class="project-card">
+                           <img src="https://placehold.co/600x338/82c91e/white?text=DSA in Cplusplus" alt="DSA in Cplusplus" />
+                        </div>
+                        <div class="project-card">
+                           <img src="https://placehold.co/600x338/f59f00/white?text=Databases" alt="Databases" />
+                        </div>
+                        <div class="project-card">
+                           <img src="https://placehold.co/600x338/f59f00/white?text=HTML and CSS" alt="HTML and CSS" />
+                        </div>
+                        <div class="project-card">
+                           <img src="https://placehold.co/600x338/f59f00/white?text=Javascript" alt="Javascript" />
+                        </div>
+                    </div>
+                    <button onclick="scrollRow(this, 'right')" class="scroll-button right">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 2rem; height: 2rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 
+      MODALS (REMOVED)
+    -->
+
+    <!-- Footer -->
+    <footer id="contact" class="container">
+        <div id="main-footer">
+            <div class="social-links">
+                <a href="https://github.com/utkarsh-291" target="_blank" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                <a href="https://in.linkedin.com/in/utkarsh-gupte" target="_blank" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg></a>
+                <a href="mailto:your.email@example.com" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg></a>
+            </div>
+            <div class="footer-links">
+                <a href="#">About Me</a>
+                <a href="#">Contact</a>
+                <a href="#">View Resume</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <p class="footer-copy">&copy; 2025 Utkarsh Gupte. The OG.</p>
+        </div>
+    </footer>
+
+    <!-- 
+      START OF JAVASCRIPT
+    -->
+    <script>
+        // --- HEADER SCROLL ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                // FIX: Removed this line so the header stays dark
+                // header.classList.remove('scrolled');
+            }
+        });
+
+        // --- ROW SCROLL ---
+        function scrollRow(button, direction) {
+            const row = button.closest('.row-container').querySelector('.row-scroll');
+            const scrollAmount = row.clientWidth * 0.8; // Scroll by 80%
+            
+            if (direction === 'left') {
+                row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                row.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+        
+        // --- HERO SLIDER LOGIC ---
+        const sliderTrack = document.querySelector('.hero-slider-track');
+        const sliderDots = document.querySelectorAll('.slider-dot');
+        const slides = document.querySelectorAll('.hero-slide');
+        const slideCount = slides.length;
+        let currentSlide = 0;
+
+        function moveToSlide(slideIndex) {
+            // 1. Move the track
+            sliderTrack.style.transform = `translateX(-${slideIndex * (100 / slideCount)}%)`;
+            
+            // 2. Update active dot
+            sliderDots.forEach(dot => dot.classList.remove('active'));
+            sliderDots[slideIndex].classList.add('active');
+            
+            // 3. Update current slide index
+            currentSlide = slideIndex;
+        }
+
+        function nextSlide() {
+            let nextSlideIndex = (currentSlide + 1) % slideCount;
+            moveToSlide(nextSlideIndex);
+        }
+        
+        function prevSlide() {
+            let prevSlideIndex = (currentSlide - 1 + slideCount) % slideCount;
+            moveToSlide(prevSlideIndex);
+        }
+        
+        // Add click event to dots
+        sliderDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                moveToSlide(index);
+            });
+        });
+
+        // --- 
+        // PROJECT MODAL FUNCTIONS REMOVED
+        // ---
+        
+    </script>
+    <!-- END OF JAVASCRIPT -->
+</body>
+</html>
+
