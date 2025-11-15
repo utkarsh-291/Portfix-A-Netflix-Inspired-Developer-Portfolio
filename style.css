@@ -4,6 +4,22 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+#about-me {
+  padding: 60px 0;  
+  text-align: center; 
+}
+
+#about-me p {
+  font-size: 1.1rem; 
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 body {
     background-color: #141414;
     color: #ffffff;
@@ -18,7 +34,6 @@ body {
     display: none;
 }
 
-/* --- Reusable Container --- */
 .container {
     width: 100%;
     max-width: 1400px;
@@ -447,9 +462,14 @@ body {
     font-size: 12px; /* 12px */
 }
 
-footer .fa-brands,
-footer .fa-solid {
-  font-size: 24px; 
-  color: white;    
+.social-links .fa-brands,
+.social-links .bxl-leetcode {
+  font-size: 24px;
+  color: white;
   margin: 0 10px;
+}
+
+.bx.bxl-leetcode::before {
+  content: "\ecaa"; /* This is the icon itself */
+  font-family: 'Boxicons';
 }
