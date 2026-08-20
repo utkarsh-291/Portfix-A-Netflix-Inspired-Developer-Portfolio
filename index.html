@@ -1,172 +1,660 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Utkarsh Gupte</title>
+
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
+
+    <!-- ================= HEADER ================= -->
+
     <header id="main-header" class="scrolled">
+
         <div class="container">
-            <a href="#" class="logo">Portfix</a>
+
+            <a href="#" class="logo">
+                Portfix
+            </a>
+
             <nav>
                 <a href="#">Home</a>
                 <a href="#skills">Skills</a>
                 <a href="#contact">Contact</a>
             </nav>
+
             <div class="header-right">
-                <!-- Notification Bell Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 1.5rem; height: 1.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+
+                <!-- Notification Bell -->
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    style="width: 1.5rem; height: 1.5rem;"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+
                 </svg>
+
                 <div class="avatar">
-                   <img src="https://placehold.co/32x32/lightblue/black?text=U" alt="User Avatar"/>
+
+                    <img src="https://placehold.co/32x32/lightblue/black?text=U"
+                        alt="User Avatar">
+
                 </div>
+
             </div>
+
         </div>
+
     </header>
 
+
+    <!-- ================= MAIN ================= -->
+
     <main>
+
+
+        <!-- ================= HERO SLIDER ================= -->
+
         <section class="hero-slider">
-            <div class="hero-slider-track">
-                <!-- Slide 1: Student Registration System -->
-                <div class="hero-slide">
-                    <div class="hero-background" style="background-image: url('assets/sms.png');"></div>
-                    <div class="hero-gradient"></div>
-                    <div class="container hero-content">
-                        <h2>Student Registration and Quiz System</h2>
-                        <h3>Python | SQLite</h3>
-                        <p>A foundational desktop application for managing student records with a GUI, full CRUD functionality, and a MySQL database.</p>
-                        <div class="hero-buttons">
-                            <a href="https://github.com/utkarsh-291/Student-Registration-and-Quiz-System" target="_blank" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                View on GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Slide 2: Portfix -->
+
+            <!--
+                IMPORTANT:
+
+                This is the new slider container.
+
+                It uses native horizontal scrolling
+                instead of transform: translateX().
+            -->
+
+            <div class="hero-slides">
+
+
+                <!-- ================= SLIDE 1 ================= -->
+
                 <div class="hero-slide">
-                    <div class="hero-background" style="background-color: rgb(0, 148, 207);"></div>
-                    <div class="hero-gradient"></div>
-                    <div class="container hero-content">
-                        <h2>Portfix (This Portfolio)</h2>
-                        <h3>HTML | CSS | JavaScript</h3>
-                        <p>A portfolio built from scratch to mimic the Netflix UI, demonstrating front-end skills in HTML, CSS, and vanilla JavaScript.</p>
-                        <div class="hero-buttons">
-                             <a href="https://github.com/utkarsh-291" target="_blank" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                View on GitHub
-                            </a>
-                        </div>
+
+                    <div class="hero-background"
+                        style="background-color: lightblue;">
                     </div>
-                </div>
-                
-                <!-- Slide 3: Mental Health System -->
-                <div class="hero-slide">
-                    <div class="hero-background" style="background-image: url('assets/image.png');"></div>
+
                     <div class="hero-gradient"></div>
+
                     <div class="container hero-content">
-                        <h2>FrameRate</h2>
-                        <h3>React | Express | TMDB API</h3>
-                        <p>Discover new releases, search your favorites, and track your personal ratings.</p>
+
+                        <h2>
+                            FrameRate
+                        </h2>
+
+                        <h3>
+                            React | Express | PostgreSQL | TMDB API
+                        </h3>
+
+                        <p>
+                            Discover new releases, search your favorites,
+                            and track your personal ratings.
+                        </p>
+
                         <div class="hero-buttons">
-                             <a href="https://myframerate.vercel.app" target="_blank" class="btn btn-primary">
+
+                            <a href="https://myframerate.vercel.app"
+                                target="_blank"
+                                class="btn btn-primary">
+
                                 View LIVE
+
                             </a>
+
                         </div>
+
                     </div>
+
+                </div>
+
+
+                <!-- ================= SLIDE 2 ================= -->
+
+                <div class="hero-slide">
+
+                    <div class="hero-background"
+                        style="background-color: red;">
+                    </div>
+
+                    <div class="hero-gradient"></div>
+
+                    <div class="container hero-content">
+
+                        <h2>
+                            This Portfolio
+                        </h2>
+
+                        <h3>
+                            HTML | CSS | JavaScript
+                        </h3>
+
+                        <p>
+                            A portfolio built from scratch to mimic the
+                            Netflix UI, demonstrating front-end skills
+                            in HTML, CSS, and vanilla JavaScript.
+                        </p>
+
+                        <div class="hero-buttons">
+
+                            <a href="https://github.com/utkarsh-291"
+                                target="_blank"
+                                class="btn btn-primary">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12
+                                    0 5.302 3.438 9.8 8.207 11.387
+                                    .599.111.793-.261.793-.577v-2.234
+                                    c-3.338.726-4.033-1.416-4.033-1.416
+                                    -.546-1.387-1.333-1.756-1.333-1.756
+                                    -1.089-.745.083-.729.083-.729
+                                    1.205.084 1.839 1.237 1.839 1.237
+                                    1.07 1.834 2.807 1.304 3.492.997
+                                    .107-.775.418-1.305.762-1.604
+                                    -2.665-.305-5.467-1.334-5.467-5.931
+                                    0-1.311.469-2.381 1.236-3.221
+                                    -.124-.303-.535-1.524.117-3.176
+                                    0 0 1.008-.322 3.301 1.23
+                                    .957-.266 1.983-.399 3.003-.404
+                                    1.02.005 2.047.138 3.006.404
+                                    2.291-1.552 3.297-1.23 3.297-1.23
+                                    .653 1.653.242 2.874.118 3.176
+                                    .77.84 1.235 1.911 1.235 3.221
+                                    0 4.609-2.807 5.624-5.479 5.921
+                                    .43.372.823 1.102.823 2.222v3.293
+                                    c0 .319.192.694.801.576
+                                    4.765-1.589 8.199-6.086
+                                    8.199-11.386
+                                    0-6.627-5.373-12-12-12z" />
+
+                                </svg>
+
+                                View on GitHub
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= SLIDE 3 ================= -->
+
+                <div class="hero-slide">
+
+                    <div class="hero-background"
+                        style="background-color: black;">
+                    </div>
+
+                    <div class="hero-gradient"></div>
+
+                    <div class="container hero-content">
+
+                        <h2>
+                            Student Registration and Quiz System
+                        </h2>
+
+                        <h3>
+                            Python | SQLite
+                        </h3>
+
+                        <p>
+                            A foundational desktop application for managing
+                            student records with a GUI, full CRUD functionality,
+                            and a SQLite database.
+                        </p>
+
+                        <div class="hero-buttons">
+
+                            <a href="https://github.com/utkarsh-291/Student-Registration-and-Quiz-System"
+                                target="_blank"
+                                class="btn btn-primary">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12
+                                    0 5.302 3.438 9.8 8.207 11.387
+                                    .599.111.793-.261.793-.577v-2.234
+                                    c-3.338.726-4.033-1.416-4.033-1.416
+                                    -.546-1.387-1.333-1.756-1.333-1.756
+                                    -1.089-.745.083-.729.083-.729
+                                    1.205.084 1.839 1.237 1.839 1.237
+                                    1.07 1.834 2.807 1.304 3.492.997
+                                    .107-.775.418-1.305.762-1.604
+                                    -2.665-.305-5.467-1.334-5.467-5.931
+                                    0-1.311.469-2.381 1.236-3.221
+                                    -.124-.303-.535-1.524.117-3.176
+                                    0 0 1.008-.322 3.301 1.23
+                                    .957-.266 1.983-.399 3.003-.404
+                                    1.02.005 2.047.138 3.006.404
+                                    2.291-1.552 3.297-1.23 3.297-1.23
+                                    .653 1.653.242 2.874.118 3.176
+                                    .77.84 1.235 1.911 1.235 3.221
+                                    0 4.609-2.807 5.624-5.479 5.921
+                                    .43.372.823 1.102.823 2.222v3.293
+                                    c0 .319.192.694.801.576
+                                    4.765-1.589 8.199-6.086
+                                    8.199-11.386
+                                    0-6.627-5.373-12-12-12z" />
+
+                                </svg>
+
+                                View on GitHub
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= SLIDE 4 ================= -->
+
+                <div class="hero-slide">
+
+                    <div class="hero-background"
+                        style="background-color: black;">
+                    </div>
+
+                    <div class="hero-gradient"></div>
+
+                    <div class="container hero-content">
+
+                        <h2>
+                            Expense Tracker
+                        </h2>
+
+                        <h3>
+                            Python | SQLite | Streamlit | Python Libraries
+                        </h3>
+
+                        <p>
+                            An application to track your expenses.
+                        </p>
+
+                        <div class="hero-buttons">
+
+                            <a href="https://github.com/utkarsh-291/Expense-Tracker"
+                                target="_blank"
+                                class="btn btn-primary">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12
+                                    0 5.302 3.438 9.8 8.207 11.387
+                                    .599.111.793-.261.793-.577v-2.234
+                                    c-3.338.726-4.033-1.416-4.033-1.416
+                                    -.546-1.387-1.333-1.756-1.333-1.756
+                                    -1.089-.745.083-.729.083-.729
+                                    1.205.084 1.839 1.237 1.839 1.237
+                                    1.07 1.834 2.807 1.304 3.492.997
+                                    .107-.775.418-1.305.762-1.604
+                                    -2.665-.305-5.467-1.334-5.467-5.931
+                                    0-1.311.469-2.381 1.236-3.221
+                                    -.124-.303-.535-1.524.117-3.176
+                                    0 0 1.008-.322 3.301 1.23
+                                    .957-.266 1.983-.399 3.003-.404
+                                    1.02.005 2.047.138 3.006.404
+                                    2.291-1.552 3.297-1.23 3.297-1.23
+                                    .653 1.653.242 2.874.118 3.176
+                                    .77.84 1.235 1.911 1.235 3.221
+                                    0 4.609-2.807 5.624-5.479 5.921
+                                    .43.372.823 1.102.823 2.222v3.293
+                                    c0 .319.192.694.801.576
+                                    4.765-1.589 8.199-6.086
+                                    8.199-11.386
+                                    0-6.627-5.373-12-12-12z" />
+
+                                </svg>
+
+                                View on GitHub
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
-            <!-- Slider Navigation Dots -->
-            <div class="slider-dots">
-                <span class="slider-dot active" onclick="moveToSlide(0)"></span>
-                <span class="slider-dot" onclick="moveToSlide(1)"></span>
-                <span class="slider-dot" onclick="moveToSlide(2)"></span>
-            </div>
-            
-            <!-- Hero Scroll Buttons -->
-            <button class="hero-scroll-btn left" onclick="prevSlide()">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 3rem; height: 3rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+
+
+            <!-- ================= SLIDER BUTTONS ================= -->
+
+            <button class="hero-scroll-btn left"
+                onclick="scrollHero(-1)"
+                aria-label="Previous slide">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    style="width: 3rem; height: 3rem;"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 19l-7-7 7-7" />
+
+                </svg>
+
             </button>
-            <button class="hero-scroll-btn right" onclick="nextSlide()">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 3rem; height: 3rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+
+
+            <button class="hero-scroll-btn right"
+                onclick="scrollHero(1)"
+                aria-label="Next slide">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    style="width: 3rem; height: 3rem;"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5l7 7-7 7" />
+
+                </svg>
+
             </button>
+
         </section>
 
 
-        <!-- Content Rows Section -->
-        <section class="content-section" id="about-me">
-            
+        <!-- ================= ABOUT ================= -->
+
+        <section class="content-section"
+            id="about-me">
+
             <div class="about-section container">
-                
-                <h2>Utkarsh Gupte</h2>
-                <h3 >Web Developer | Problem Solver</h3>
-                <section  class="container">
+
+                <h2>
+                    Utkarsh Gupte
+                </h2>
+
+                <h3>
+                    Web Developer | Problem Solver
+                </h3>
+
+                <section class="container">
+
                     <p style="margin-top: 16px;">
-                        I’m a Computer Science undergrad with hands-on experience in Java, C++, SQL, and development. Over the past year, I’ve focused on problem-solving through DSA in C++ and building small projects to apply my skills.
-                        Beyond tech, I founded Undefined Productions, a space where I write and direct short films. That experience taught me storytelling, structure, and collaboration. Currently, I’m aiming to grow as a Web Developer, exploring real-world projects, internships, or team collaborations.
+
+                        I’m a Computer Science undergrad with hands-on
+                        experience in C++, Java, SQL, and development.
+                        Over the past year, I’ve focused on problem-solving
+                        through DSA in C++ and building small projects to
+                        apply my skills.
+
+                        <br>
+                        <br>
+
+                        Beyond tech, I founded Undefined Productions,
+                        a space where I write and direct short films.
+                        That experience taught me team collaboration and project management.
+
+                        <br>
+                        <br>
+
+                        Currently, I’m aiming to grow as a Web Developer,
+                        exploring real-world projects, internships,
+                        or team collaborations.
+
                     </p>
+
                 </section>
+
             </div>
 
-            <!-- Skills Row -->
-            <div id="skills" class="content-row">
-                <h2>Skills & Technologies</h2>
+
+            <!-- ================= SKILLS ================= -->
+
+            <div id="skills"
+                class="content-row">
+
+                <h2>
+                    Skills & Technologies
+                </h2>
+
                 <div class="row-container">
-                    <button onclick="scrollRow(this, 'left')" class="scroll-button left">
-                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 2rem; height: 2rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+
+
+                    <!-- Left Button -->
+
+                    <button onclick="scrollRow(this, 'left')"
+                        class="scroll-button left"
+                        aria-label="Scroll skills left">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            style="width: 2rem; height: 2rem;"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2">
+
+                            <path stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15 19l-7-7 7-7" />
+
+                        </svg>
+
                     </button>
+
+
+                    <!-- Skills -->
+
                     <div class="row-scroll scrollbar-hide">
+
+
+                        <!-- CPP -->
+
                         <div class="project-card">
-                           <img src="https://placehold.co/600x338/15aabf/white?text=Python" alt="Java" />
+
+                            <img src="https://placehold.co/600x338/15aabf/white?text=CPP"
+                                alt="CPP">
+
                         </div>
+
+
+                        <!-- JAVA -->
+
                         <div class="project-card">
-                           <img src="https://placehold.co/600x338/f59f00/white?text=SQL" alt="SQL" />
+
+                            <img src="https://placehold.co/600x338/f59f00/white?text=JAVA"
+                                alt="JAVA">
+
                         </div>
-                        
+
+
+                        <!-- DSA -->
+
                         <div class="project-card">
-                           <img src="https://placehold.co/600x338/82c91e/white?text=DSA in CPP" alt="DSA in Cplusplus" />
+
+                            <img src="https://placehold.co/600x338/82c91e/white?text=DSA+in+CPP"
+                                alt="DSA in C++">
+
                         </div>
+
+
+                        <!-- SQL -->
+
                         <div class="project-card">
-                           <img src="https://placehold.co/600x338/f59f00/white?text=Databases" alt="Databases" />
+
+                            <img src="https://placehold.co/600x338/f59f00/white?text=SQL"
+                                alt="SQL">
+
                         </div>
+
+
+                        <!-- HTML and CSS -->
+
                         <div class="project-card">
-                           <img src="https://placehold.co/600x338/f59f00/white?text=HTML and CSS" alt="HTML and CSS" />
+
+                            <img src="https://placehold.co/600x338/f59f00/white?text=HTML+and+CSS"
+                                alt="HTML and CSS">
+
                         </div>
+
+
+                        <!-- JavaScript -->
+
                         <div class="project-card">
-                           <img src="https://placehold.co/600x338/f59f00/white?text=Javascript" alt="Javascript" />
+
+                            <img src="https://placehold.co/600x338/f59f00/white?text=JavaScript"
+                                alt="JavaScript">
+
                         </div>
+
                     </div>
-                    <button onclick="scrollRow(this, 'right')" class="scroll-button right">
-                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 2rem; height: 2rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+
+
+                    <!-- Right Button -->
+
+                    <button onclick="scrollRow(this, 'right')"
+                        class="scroll-button right"
+                        aria-label="Scroll skills right">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            style="width: 2rem; height: 2rem;"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2">
+
+                            <path stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 5l7 7-7 7" />
+
+                        </svg>
+
                     </button>
+
                 </div>
+
             </div>
+
         </section>
-        
+
     </main>
-    <!-- Footer -->
-    <footer id="contact" class="container">
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer id="contact"
+        class="container">
+
         <div id="main-footer">
+
+
+            <!-- Social Links -->
+
             <div class="social-links">
-                <a href="https://github.com/utkarsh-291" target="_blank" aria-label="GitHub"> <i class="fa-brands fa-github"></i> </a>
-                <a href="https://in.linkedin.com/in/utkarsh-gupte" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+
+                <a href="https://github.com/utkarsh-291"
+                    target="_blank"
+                    aria-label="GitHub">
+
+                    <i class="fa-brands fa-github"></i>
+
+                </a>
+
+
+                <a href="https://in.linkedin.com/in/utkarsh-gupte"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn">
+
+                    <i class="fa-brands fa-linkedin"></i>
+
+                </a>
+
             </div>
+
+
+            <!-- Footer Links -->
+
             <div class="footer-links">
-                <a href="#about-me">About Me</a>
-                <a href="#contact">Contact</a>
-                <a href="assets/UtkarshGupteResume.pdf" target="_blank">View Resume</a>
-                <a href="https://leetcode.com/u/utkarsh__19/" target="_blank">LeetCode</a>
+
+                <a href="#about-me">
+                    About Me
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+                <a href="assets/UtkarshGupteResume.pdf"
+                    target="_blank">
+
+                    View Resume
+
+                </a>
+
+                <a href="https://leetcode.com/u/utkarsh__19/"
+                    target="_blank">
+
+                    LeetCode
+
+                </a>
+
             </div>
-            <p>Email: utkarshgupte2912@gmail.com</p>
+
+
+            <!-- Email -->
+
+            <p>
+                Email: utkarshgupte2912@gmail.com
+            </p>
+
         </div>
+
     </footer>
 
+
+    <!-- ================= JAVASCRIPT ================= -->
+
     <script src="script.js"></script>
+
 </body>
+
 </html>
