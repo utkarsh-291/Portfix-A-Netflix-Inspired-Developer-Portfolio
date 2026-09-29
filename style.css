@@ -491,7 +491,7 @@ body {
 
 
 /* =========================
-   SKILLS LOGOS
+   SKILLS CAROUSEL
    ========================= */
 
 .skills-section {
@@ -502,57 +502,58 @@ body {
     margin-bottom: 1.5rem;
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 1rem;
-    padding: 0 1.5rem;
+.skills-carousel {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 0.5rem 1.5rem 1rem;
+}
+
+.skills-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.skills-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
 }
 
 .skill-logo {
-    min-height: 150px;
-    border-radius: 12px;
+    width: 150px;
+    height: 150px;
+    flex: 0 0 150px;
+    border-radius: 14px;
     background: linear-gradient(145deg, #1f1f1f, #111111);
     border: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.8rem;
+    scroll-snap-align: start;
     transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .skill-logo i {
-    font-size: 4rem;
-}
-
-.skill-logo span {
-    color: #d4d4d4;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 5rem;
 }
 
 .skill-logo:hover {
-    transform: translateY(-6px) scale(1.03);
+    transform: translateY(-6px) scale(1.04);
     background: linear-gradient(145deg, #292929, #151515);
     border-color: rgba(255, 255, 255, 0.18);
 }
 
 .code-symbol {
     font-family: monospace;
-    font-size: 3.2rem !important;
+    font-size: 3.5rem;
     font-weight: 800;
-    color: #ffffff;
 }
 
-@media (min-width: 600px) {
-    .skills-grid {
-        grid-template-columns: repeat(4, minmax(120px, 1fr));
-    }
-}
-
-@media (min-width: 1400px) {
-    .skills-grid {
+@media (min-width: 768px) {
+    .skills-carousel {
         padding-left: 0;
         padding-right: 0;
     }
