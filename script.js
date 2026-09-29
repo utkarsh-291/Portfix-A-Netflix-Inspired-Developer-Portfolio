@@ -62,13 +62,21 @@ function setupInfiniteCarousel(selector, trackSelector, interval = 3500) {
 
     const originalItems = [...track.children];
 
-    // Duplicate the original items so the second set follows
-    // immediately after the first set.
+    // Create one identical copy of the complete skill set.
+    // CSS moves exactly one set width, so the animation can
+    // restart from the beginning without any visible jump.
     originalItems.forEach(item => {
         const clone = item.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
         track.appendChild(clone);
     });
+
+    // The skills marquee is intentionally never paused.
+    if (selector === '.skills-carousel') {
+        return;
+    }
+
+    let paused = false;
 
     function getCycleWidth() {
         const gap = parseFloat(getComputedStyle(track).gap) || 0;
@@ -85,11 +93,6 @@ function setupInfiniteCarousel(selector, trackSelector, interval = 3500) {
             carousel.scrollLeft -= cycleWidth;
         }
     }
-
-    /*
-     * Other carousels keep the original step-by-step auto-scroll.
-     */
-    let paused = false;
 
     function advance() {
         if (paused) return;
