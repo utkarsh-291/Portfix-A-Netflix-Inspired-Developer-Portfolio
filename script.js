@@ -52,57 +52,67 @@ function scrollHero(direction) {
 }
 
 
-/* --- CAROUSEL AUTOPLAY --- */
+/* --- SEAMLESS INFINITE CAROUSELS --- */
 
-function setupCarouselAutoplay(selector, interval = 5000) {
+function setupInfiniteCarousel(selector, trackSelector, interval = 3500) {
     const carousel = document.querySelector(selector);
+    const track = document.querySelector(trackSelector);
 
-    if (!carousel) return;
+    if (!carousel || !track) return;
 
-    let autoplayTimer;
-    let isPaused = false;
+    const originalItems = [...track.children];
+    const originalWidth = track.scrollWidth;
 
-    function startAutoplay() {
-        clearInterval(autoplayTimer);
+    originalItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+    });
 
-        autoplayTimer = setInterval(() => {
-            if (isPaused) return;
+    let timer;
+    let paused = false;
 
-            const scrollAmount = carousel.clientWidth * 0.8;
-            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-            if (carousel.scrollLeft >= maxScroll - 5) {
-                carousel.scrollTo({
-                    left: 0,
-                    behavior: 'smooth'
-                });
-            } else {
-                carousel.scrollBy({
-                    left: scrollAmount,
-                    behavior: 'smooth'
-                });
-            }
-        }, interval);
+    function normalizeScroll() {
+        if (carousel.scrollLeft >= originalWidth) {
+            carousel.scrollLeft -= originalWidth;
+        }
     }
 
+    function advance() {
+        if (paused) return;
+
+        const firstItem = track.children[0];
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        const amount = firstItem.getBoundingClientRect().width + gap;
+
+        carousel.scrollBy({
+            left: amount,
+            behavior: 'smooth'
+        });
+
+        setTimeout(normalizeScroll, 500);
+    }
+
+    timer = setInterval(advance, interval);
+
     carousel.addEventListener('mouseenter', () => {
-        isPaused = true;
+        paused = true;
     });
 
     carousel.addEventListener('mouseleave', () => {
-        isPaused = false;
+        paused = false;
     });
 
     carousel.addEventListener('focusin', () => {
-        isPaused = true;
+        paused = true;
     });
 
     carousel.addEventListener('focusout', () => {
-        isPaused = false;
+        paused = false;
     });
 
-    startAutoplay();
+    carousel.addEventListener('scroll', normalizeScroll);
 }
 
-setupCarouselAutoplay('.hero-slides', 5000);
-setupCarouselAutoplay('.skills-carousel', 3500);
+setupInfiniteCarousel('.hero-slides', '.hero-slides', 5000);
+setupInfiniteCarousel('.skills-carousel', '.skills-track', 3500);
