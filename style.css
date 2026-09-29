@@ -520,6 +520,18 @@ body {
     align-items: center;
     gap: 1.5rem;
     width: max-content;
+    animation: skills-marquee 42s linear infinite;
+    will-change: transform;
+}
+
+@keyframes skills-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 .skill-logo {
