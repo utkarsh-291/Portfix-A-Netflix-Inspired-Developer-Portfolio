@@ -649,3 +649,16 @@ body {
 
     font-family: 'Boxicons';
 }
+
+/* Keep the skills carousel logo-only, matching the project carousel style. */
+.skill-logo span:not(.code-symbol) {
+    display: none;
+}
+
+.skill-logo i {
+    font-size: 5.5rem;
+}
+
+.skill-logo .code-symbol {
+    font-size: 4.25rem;
+}
