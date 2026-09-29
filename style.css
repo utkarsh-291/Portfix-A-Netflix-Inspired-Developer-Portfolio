@@ -520,7 +520,7 @@ body {
     align-items: center;
     gap: 1.5rem;
     width: max-content;
-    animation: skills-marquee 42s linear infinite;
+    animation: skills-marquee 38s linear infinite;
     will-change: transform;
 }
 
@@ -530,7 +530,7 @@ body {
     }
 
     to {
-        transform: translateX(-50%);
+        transform: translateX(calc(-50% - 0.75rem));
     }
 }
 
