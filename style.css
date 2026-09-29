@@ -504,11 +504,9 @@ body {
 
 .skills-carousel {
     position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
+    display: block;
+    width: 100%;
+    overflow: hidden;
     padding: 0.5rem 1.5rem 1rem;
 }
 
@@ -518,6 +516,8 @@ body {
 
 .skills-track {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: 1.5rem;
     width: max-content;
 }
