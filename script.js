@@ -87,29 +87,6 @@ function setupInfiniteCarousel(selector, trackSelector, interval = 3500) {
     }
 
     /*
-     * Skills carousel:
-     * Move continuously instead of jumping from card to card.
-     * This creates the slow, smooth Netflix-style marquee effect.
-     */
-    if (selector === '.skills-carousel') {
-        let lastTime = performance.now();
-        const speed = 22; // pixels per second
-
-        function continuousScroll(currentTime) {
-            const deltaTime = (currentTime - lastTime) / 1000;
-            lastTime = currentTime;
-
-            carousel.scrollLeft += speed * deltaTime;
-            normalizeScroll();
-
-            requestAnimationFrame(continuousScroll);
-        }
-
-        requestAnimationFrame(continuousScroll);
-        return;
-    }
-
-    /*
      * Other carousels keep the original step-by-step auto-scroll.
      */
     let paused = false;
