@@ -51,52 +51,58 @@ function scrollHero(direction) {
     });
 }
 
-/* --- PROJECT AUTOPLAY --- */
 
-const heroSlider = document.querySelector('.hero-slides');
+/* --- CAROUSEL AUTOPLAY --- */
 
-if (heroSlider) {
+function setupCarouselAutoplay(selector, interval = 5000) {
+    const carousel = document.querySelector(selector);
+
+    if (!carousel) return;
+
     let autoplayTimer;
-    let isHeroPaused = false;
+    let isPaused = false;
 
-    function startHeroAutoplay() {
+    function startAutoplay() {
         clearInterval(autoplayTimer);
 
         autoplayTimer = setInterval(() => {
-            if (isHeroPaused) return;
+            if (isPaused) return;
 
-            const slideWidth = heroSlider.clientWidth;
-            const maxScroll = heroSlider.scrollWidth - heroSlider.clientWidth;
+            const scrollAmount = carousel.clientWidth * 0.8;
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
 
-            if (heroSlider.scrollLeft >= maxScroll - 5) {
-                heroSlider.scrollTo({
+            if (carousel.scrollLeft >= maxScroll - 5) {
+                carousel.scrollTo({
                     left: 0,
                     behavior: 'smooth'
                 });
             } else {
-                heroSlider.scrollBy({
-                    left: slideWidth,
+                carousel.scrollBy({
+                    left: scrollAmount,
                     behavior: 'smooth'
                 });
             }
-        }, 5000);
+        }, interval);
     }
 
-    heroSlider.addEventListener('mouseenter', () => {
-        isHeroPaused = true;
+    carousel.addEventListener('mouseenter', () => {
+        isPaused = true;
     });
 
-    heroSlider.addEventListener('mouseleave', () => {
-        isHeroPaused = false;
+    carousel.addEventListener('mouseleave', () => {
+        isPaused = false;
     });
 
-    heroSlider.addEventListener('focusin', () => {
-        isHeroPaused = true;
+    carousel.addEventListener('focusin', () => {
+        isPaused = true;
     });
 
-    heroSlider.addEventListener('focusout', () => {
-        isHeroPaused = false;
+    carousel.addEventListener('focusout', () => {
+        isPaused = false;
     });
 
-    startHeroAutoplay();
+    startAutoplay();
 }
+
+setupCarouselAutoplay('.hero-slides', 5000);
+setupCarouselAutoplay('.skills-carousel', 3500);
