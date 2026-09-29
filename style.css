@@ -139,8 +139,8 @@ body {
 
 .project-framerate {
     background:
-        radial-gradient(circle at 75% 25%, rgba(229, 9, 20, 0.55), transparent 35%),
-        linear-gradient(135deg, #07111f 0%, #102a43 48%, #030609 100%);
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url("assets/framerate-bg.jpg") center / cover no-repeat;
 }
 
 .project-portfix {
@@ -151,8 +151,8 @@ body {
 
 .project-student {
     background:
-        radial-gradient(circle at 70% 30%, rgba(77, 171, 247, 0.35), transparent 32%),
-        linear-gradient(135deg, #0b1020 0%, #172554 50%, #050814 100%);
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url("assets/student-bg.jpg") center / cover no-repeat;
 }
 
 .project-expense {
