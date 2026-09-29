@@ -61,27 +61,41 @@ function setupInfiniteCarousel(selector, trackSelector, interval = 3500) {
     if (!carousel || !track) return;
 
     const originalItems = [...track.children];
-    const originalWidth = track.scrollWidth;
 
+    // Clone the original set so the second copy follows immediately
+    // after the first one. When we reach the second set, jump back by
+    // exactly one original cycle.
     originalItems.forEach(item => {
         const clone = item.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
         track.appendChild(clone);
     });
 
-    let timer;
-    let paused = false;
+    function getCycleWidth() {
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+
+        return originalItems.reduce((total, item) => {
+            return total + item.getBoundingClientRect().width;
+        }, 0) + gap * originalItems.length;
+    }
 
     function normalizeScroll() {
-        if (carousel.scrollLeft >= originalWidth) {
-            carousel.scrollLeft -= originalWidth;
+        const cycleWidth = getCycleWidth();
+
+        if (cycleWidth > 0 && carousel.scrollLeft >= cycleWidth) {
+            carousel.scrollLeft -= cycleWidth;
         }
     }
+
+    let paused = false;
 
     function advance() {
         if (paused) return;
 
         const firstItem = track.children[0];
+
+        if (!firstItem) return;
+
         const gap = parseFloat(getComputedStyle(track).gap) || 0;
         const amount = firstItem.getBoundingClientRect().width + gap;
 
@@ -89,11 +103,9 @@ function setupInfiniteCarousel(selector, trackSelector, interval = 3500) {
             left: amount,
             behavior: 'smooth'
         });
-
-        setTimeout(normalizeScroll, 500);
     }
 
-    timer = setInterval(advance, interval);
+    setInterval(advance, interval);
 
     carousel.addEventListener('mouseenter', () => {
         paused = true;
