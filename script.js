@@ -62,9 +62,8 @@ function setupInfiniteCarousel(selector, trackSelector, interval = 3500) {
 
     const originalItems = [...track.children];
 
-    // Clone the original set so the second copy follows immediately
-    // after the first one. When we reach the second set, jump back by
-    // exactly one original cycle.
+    // Duplicate the original items so the second set follows
+    // immediately after the first set.
     originalItems.forEach(item => {
         const clone = item.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
@@ -87,6 +86,32 @@ function setupInfiniteCarousel(selector, trackSelector, interval = 3500) {
         }
     }
 
+    /*
+     * Skills carousel:
+     * Move continuously instead of jumping from card to card.
+     * This creates the slow, smooth Netflix-style marquee effect.
+     */
+    if (selector === '.skills-carousel') {
+        let lastTime = performance.now();
+        const speed = 22; // pixels per second
+
+        function continuousScroll(currentTime) {
+            const deltaTime = (currentTime - lastTime) / 1000;
+            lastTime = currentTime;
+
+            carousel.scrollLeft += speed * deltaTime;
+            normalizeScroll();
+
+            requestAnimationFrame(continuousScroll);
+        }
+
+        requestAnimationFrame(continuousScroll);
+        return;
+    }
+
+    /*
+     * Other carousels keep the original step-by-step auto-scroll.
+     */
     let paused = false;
 
     function advance() {
